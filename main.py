@@ -1,5 +1,5 @@
 #testing rolimons api!!1111
-
+import random #soon
 import requests
 base_url = "https://api.rolimons.com/"
 
@@ -59,6 +59,9 @@ while True:
                     f"RAP: {item_data['items'][item_id_input][2]}\n"
                     f"Value: {item_data['items'][item_id_input][3]}\n"
                     f"Demand: {demand_thingy}")
+    elif response == "3":
+        #this will be a roblox random API game soon
+        pass
         except:
             print("Use a valid Limited Item ID")
     elif response == "q":
