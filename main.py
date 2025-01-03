@@ -1,7 +1,15 @@
-#testing rolimons api!!1111
-import random #soon
 import requests
+import webbrowser
+
+# make it where it saves the data of the limited items and compares the growth between the items from the times you pick it
+# this will save the date and time of when you recording your responses to conclude a result
+
 base_url = "https://api.rolimons.com/"
+
+user_settings = {
+    "annoying popups": "False",
+    "test": "False"
+}
 
 demand_chart = {
     -1: "N/A",
@@ -41,7 +49,7 @@ def get_item_details():
             print("\nInvalid Limited Item ID (ex. https://www.roblox.com/catalog/---(1073690)---/JJ5x5s-White-Top-Hat)")
 
 while True:
-    response = input("\nDeckerly Awesome Roblox API Lookup!\n-------------\n'1' - Get User Details\n'2' - Get Limited Item Details\n'3' - Soon\n'q' - Quit\n\n Response: ")
+    response = input("\nDeckerly Awesome Roblox API Lookup!\n-------------\n'1' - Get User Details\n'2' - Get Limited Item Details\n'3' - Soon\n'q' - Quit\n\nResponse: ")
     
     if response == "1":
         user_details = get_user_details()
@@ -51,19 +59,46 @@ while True:
     elif response == "2":
         item_details = get_item_details()
         try:
+            is_projected = item_data['items'][item_id_input][8]
+            if is_projected == 1:
+                is_projected = "True"
+            else:
+                is_projected = "False"
             demand_value = item_data['items'][item_id_input][5]
             demand_thingy = demand_chart.get(demand_value, "Unknown")
+            item_value = item_data['items'][item_id_input][3]
+            item_value = demand_chart.get(item_value, "N/A")
             if item_details:
                 print(f"----------\nItem Name: {item_data['items'][item_id_input][0]}\n"
                     f"Acronym: {item_data['items'][item_id_input][1]}\n"
                     f"RAP: {item_data['items'][item_id_input][2]}\n"
-                    f"Value: {item_data['items'][item_id_input][3]}\n"
-                    f"Demand: {demand_thingy}")
-    elif response == "3":
-        #this will be a roblox random API game soon
-        pass
+                    f"Value: {item_value}\n"
+                    f"Demand: {demand_thingy}\n"
+                    f"Is Projected: {is_projected}")
+            if user_settings["annoying popups"] == "True":
+                choice = input("\nWould you like to access the page for this item? (y/n): ").lower()
+                if choice == "y":
+                    webbrowser.open(f"https://www.roblox.com/catalog/{item_id_input}")
+                elif choice == "n":
+                    break
         except:
             print("Use a valid Limited Item ID")
+
+    elif response == "3":
+        print("---SETTINGS---\n")
+        uhidk = 0
+        for key, value in user_settings.items():
+            uhidk += 1
+            print(f"{uhidk}. {key}: {value}")
+        choice = input("\n(b) - Back | Pick a Setting to Toggle: ")
+        if choice == "b":
+            break
+        elif choice == "1" and user_settings["annoying popups"] == "False":
+            user_settings["annoying popups"] = "True"
+        elif choice == "1" and user_settings["annoying popups"] == "True":
+            user_settings["annoying popups"] = "False"
+        else:
+            print("Not an Option!")
     elif response == "q":
         print("Bye!")
         exit()
