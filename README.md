@@ -1,9 +1,8 @@
 # larping
 
-I <3 Larping
-
-
-so im testing roblox api stuff with rolimons api
-
-I dont know what happened to normal roblox api i'll have 2 see.
-Im a newbie coder ^_^
+new update
+tiny very useless update but i'll work on more soon if i want to
+do not spam requests u will get blocked lol
+# -+- Patch Notes -+-
+- Working on "user settings"
+- report errors in the code thank you
